@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     setProducts([...productsDb]) // irl this would be a fetch request
-  })
+  }, [])
 
   return (
     <>
