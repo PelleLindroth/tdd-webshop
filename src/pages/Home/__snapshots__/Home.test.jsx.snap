@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders Home component correctly 1`] = `
+<main>
+  <div>
+    <label
+      htmlFor="search"
+    >
+      Search product:
+    </label>
+    <input
+      id="search"
+      type="search"
+    />
+  </div>
+  <ul>
+    <div
+      key="1"
+      role="listitem"
+    >
+      <h3>
+        A book
+      </h3>
+      <p>
+        120
+      </p>
+    </div>
+    <div
+      key="2"
+      role="listitem"
+    >
+      <h3>
+        A table
+      </h3>
+      <p>
+        1400
+      </p>
+    </div>
+    <div
+      key="3"
+      role="listitem"
+    >
+      <h3>
+        A car
+      </h3>
+      <p>
+        150000
+      </p>
+    </div>
+    <div
+      key="4"
+      role="listitem"
+    >
+      <h3>
+        desk
+      </h3>
+      <p>
+        1200
+      </p>
+    </div>
+    <div
+      key="5"
+      role="listitem"
+    >
+      <h3>
+        laptop
+      </h3>
+      <p>
+        7800
+      </p>
+    </div>
+    <div
+      key="6"
+      role="listitem"
+    >
+      <h3>
+        tv
+      </h3>
+      <p>
+        6920
+      </p>
+    </div>
+  </ul>
+</main>
+`;
