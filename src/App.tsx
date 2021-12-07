@@ -11,6 +11,7 @@ import { productsDb, IProduct } from './mocks/products'
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([])
+  const [cart, setCart] = useState<IProduct[]>([])
 
   useEffect(() => {
     setProducts([...productsDb]) // irl this would be a fetch request
@@ -18,12 +19,17 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <Routes>
         <Route path="/" element={<Home products={products} />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/product/:id" element={<ProductDetail products={products} />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetail products={products} cart={cart} setCart={setCart} />
+          }
+        />
+        <Route path="/cart" element={<Cart cart={cart} />} />
       </Routes>
     </>
   )

@@ -8,7 +8,9 @@ const Card = (props: { product: IProduct }) => {
     <div role="listitem">
       <h3>{product.name}</h3>
       <p>{product.price}</p>
-      <Link to={`/product/${product.id}`}>Go to product</Link>
+      <Link data-testid={product.name} to={`/product/${product.id}`}>
+        Go to product
+      </Link>
     </div>
   )
 }

@@ -5,18 +5,25 @@ exports[`Header renders Header component correctly 1`] = `
   <h1>
     THIS IS THE WEBSHOP
   </h1>
+  <h2>
+    Items in cart: 
+    0
+  </h2>
   <nav>
     <Link
+      data-testid="home"
       to="/"
     >
       Home
     </Link>
     <Link
+      data-testid="login"
       to="/login"
     >
       Login
     </Link>
     <Link
+      data-testid="cart"
       to="/cart"
     >
       My Cart

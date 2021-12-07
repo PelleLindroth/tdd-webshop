@@ -4,10 +4,13 @@ import { render, screen } from '@testing-library/react'
 // import userEvent from '@testing-library/user-event'
 import { productsDb } from '../../mocks/products'
 import { withPath } from '../../testing-utils'
+import userEvent from '@testing-library/user-event'
 
 describe('ProductDetail', () => {
   it('renders ProductDetail component correctly', () => {
-    const wrapper = shallow(<ProductDetail products={productsDb} />)
+    const wrapper = shallow(
+      <ProductDetail cart={[]} setCart={jest.fn()} products={productsDb} />
+    )
 
     expect(wrapper).toMatchSnapshot()
   })
@@ -15,7 +18,7 @@ describe('ProductDetail', () => {
     render(
       withPath(
         '/product/1',
-        <ProductDetail products={productsDb} />,
+        <ProductDetail cart={[]} setCart={jest.fn()} products={productsDb} />,
         '/product/:id'
       )
     )
@@ -23,10 +26,50 @@ describe('ProductDetail', () => {
     const title = await screen.findByText(/book/i)
     expect(title).toBeInTheDocument()
   })
-  // it("renders a not found message if product with matching id doesn't exist", () => {
+  it("renders a not found message if product with matching id doesn't exist", () => {
+    render(
+      withPath(
+        '/product/25',
+        <ProductDetail cart={[]} setCart={jest.fn()} products={productsDb} />,
+        '/product/:id'
+      )
+    )
 
-  // })
-  it('renders an Add to Cart button', () => {})
+    const message = screen.queryByText(/no product/i)
+
+    expect(message).toBeInTheDocument()
+  })
+  it('renders an Add to Cart button', async () => {
+    render(
+      withPath(
+        '/product/2',
+        <ProductDetail cart={[]} setCart={jest.fn()} products={productsDb} />,
+        '/product/:id'
+      )
+    )
+
+    const button = await screen.findByRole('button', { name: /add to cart/i })
+
+    expect(button).toBeInTheDocument()
+  })
+  it('calls setCart when button is clicked', async () => {
+    const setCartSpy = jest.fn()
+
+    render(
+      withPath(
+        '/product/2',
+        <ProductDetail cart={[]} setCart={setCartSpy} products={productsDb} />,
+        '/product/:id'
+      )
+    )
+
+    const button = await screen.findByRole('button', { name: /add to cart/i })
+
+    userEvent.click(button)
+
+    expect(setCartSpy).toHaveBeenCalled()
+    expect(setCartSpy).toHaveBeenCalledTimes(1)
+  })
 })
 
 // describe("Product detail integration tests", () => {

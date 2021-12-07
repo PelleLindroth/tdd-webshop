@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProductDetail renders ProductDetail component correctly 1`] = `
-<h1>
-  No product found
-</h1>
+<Fragment>
+  <h1>
+    No product found
+  </h1>
+</Fragment>
 `;
