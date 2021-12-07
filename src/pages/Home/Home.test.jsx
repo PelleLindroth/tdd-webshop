@@ -11,7 +11,7 @@ describe('Home', () => {
 
     expect(wrapper).toMatchSnapshot()
   })
-  it('renders a list of 6 products', () => {
+  it('renders a list of 6 products initially', () => {
     renderWithRouter(<Home products={productsDb} />)
     const products = screen.getAllByRole('listitem')
     expect(products).toHaveLength(6)
@@ -38,6 +38,14 @@ describe('Home', () => {
     userEvent.type(input, 'book')
 
     const newlyFilteredProducts = screen.getAllByRole('listitem')
+
+    expect(newlyFilteredProducts).toHaveLength(1)
+  })
+  it('returns car when CAR is searched (case insentitive search)', () => {
+    renderWithRouter(<Home products={productsDb} />)
+    const input = screen.getByRole('searchbox')
+    userEvent.type(input, 'CAR')
+    const newlyFilteredProducts = screen.queryAllByRole('listitem')
 
     expect(newlyFilteredProducts).toHaveLength(1)
   })

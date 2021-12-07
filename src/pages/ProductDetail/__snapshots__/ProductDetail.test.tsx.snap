@@ -2,6 +2,6 @@
 
 exports[`ProductDetail renders ProductDetail component correctly 1`] = `
 <h1>
-  Product detail
+  A book
 </h1>
 `;

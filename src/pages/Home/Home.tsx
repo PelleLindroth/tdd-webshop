@@ -8,13 +8,12 @@ const Home = (props: { products: IProduct[] }) => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
 
   useEffect(() => {
-    setFilteredProducts(
-      products.filter((product) => product.name.includes(searchPhrase))
-    )
+    setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(searchPhrase)))
   }, [products, searchPhrase])
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearchPhrase(e.currentTarget.value)
+    const phrase = e.currentTarget.value.toLowerCase()
+    setSearchPhrase(phrase)
   }
 
   return (
