@@ -2,8 +2,8 @@ import { shallow } from 'enzyme'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Home from './Home'
-import { MemoryRouter } from 'react-router-dom'
 import { productsDb } from '../../mocks/products'
+import { renderWithRouter } from '../../testing-utils'
 
 describe('Home', () => {
   it('renders Home component correctly', () => {
@@ -12,23 +12,23 @@ describe('Home', () => {
     expect(wrapper).toMatchSnapshot()
   })
   it('renders a list of 6 products', () => {
-    render(<Home products={productsDb} />, { wrapper: MemoryRouter })
+    renderWithRouter(<Home products={productsDb} />)
     const products = screen.getAllByRole('listitem')
     expect(products).toHaveLength(6)
   })
   it('shows an error message if products is empty', () => {
-    render(<Home products={[]} />, { wrapper: MemoryRouter })
+    render(<Home products={[]} />)
 
     const message = screen.getByText('Something went wrong')
     expect(message).toBeInTheDocument()
   })
   it('renders an empty input field', () => {
-    render(<Home products={productsDb} />, { wrapper: MemoryRouter })
+    renderWithRouter(<Home products={productsDb} />)
     const input = screen.getByRole('searchbox')
     expect(input).toHaveTextContent('')
   })
   it('shows correct filtered products when searching by product name', () => {
-    render(<Home products={productsDb} />, { wrapper: MemoryRouter })
+    renderWithRouter(<Home products={productsDb} />)
     const input = screen.getByRole('searchbox')
 
     const filteredProducts = screen.getAllByRole('listitem')
@@ -42,7 +42,7 @@ describe('Home', () => {
     expect(newlyFilteredProducts).toHaveLength(1)
   })
   it('shows no filtered products if search doesnt match', () => {
-    render(<Home products={productsDb} />, { wrapper: MemoryRouter })
+    renderWithRouter(<Home products={productsDb} />)
     const input = screen.getByRole('searchbox')
 
     const filteredProducts = screen.getAllByRole('listitem')
@@ -56,7 +56,7 @@ describe('Home', () => {
     expect(disappearedProducts).toHaveLength(0)
   })
   it('shows message if no products match search', () => {
-    render(<Home products={productsDb} />, { wrapper: MemoryRouter })
+    renderWithRouter(<Home products={productsDb} />)
     const input = screen.getByRole('searchbox')
 
     userEvent.type(input, 'kljhter4k')
