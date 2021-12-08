@@ -12,7 +12,7 @@ const mockCart = [
   { id: '2', name: 'table', price: 1400 },
 ]
 
-describe('Cart', () => {
+describe('Cart unit tests', () => {
   it('shallow renders Cart component correctly', () => {
     const wrapper = shallow(<Cart setCart={jest.fn()} cart={[]} />)
 

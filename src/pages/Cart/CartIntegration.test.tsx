@@ -3,7 +3,7 @@ import { renderWithRouter } from '../../testing-utils'
 import App from '../../App'
 import userEvent from '@testing-library/user-event'
 
-describe('Cart integration test', () => {
+describe('Cart integration tests', () => {
   it('increases amount of cars by 1 when + button is clicked', async () => {
     renderWithRouter(<App />)
 

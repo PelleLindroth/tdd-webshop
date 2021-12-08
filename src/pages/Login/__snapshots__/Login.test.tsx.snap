@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Login renders Login component correctly 1`] = `
-<h1>
-  LOGIN
-</h1>
-`;

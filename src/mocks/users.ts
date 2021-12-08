@@ -1,19 +1,19 @@
 export interface IUser {
-  name: string // användarens namn
-  login: string // unikt värde, används vid inloggning
+  email: string
+  password: string
 }
 
 export const usersDb: IUser[] = [
   {
-    name: 'Pelle',
-    login: 'grillkorv',
+    email: 'pelle@yahoo.com',
+    password: 'grillkorv',
   },
   {
-    name: 'Emma',
-    login: 'bananpaj',
+    email: 'emma@yahoo.com',
+    password: 'bananpaj',
   },
   {
-    name: 'Renzo',
-    login: 'paco',
+    email: 'renzo@yahoo.com',
+    password: 'paco',
   },
 ]

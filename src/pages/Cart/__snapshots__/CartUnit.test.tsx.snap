@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cart shallow renders Cart component correctly 1`] = `
+exports[`Cart unit tests shallow renders Cart component correctly 1`] = `
 <Fragment>
   <h1>
     Cart

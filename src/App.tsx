@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header/Header'
@@ -8,10 +7,12 @@ import Login from './pages/Login/Login'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import Cart from './pages/Cart/Cart'
 import { productsDb, IProduct } from './mocks/products'
+import { IUser } from './mocks/users'
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([])
   const [cart, setCart] = useState<IProduct[]>([])
+  const [user, setUser] = useState<IUser | null>(null)
 
   useEffect(() => {
     setProducts([...productsDb]) // irl this would be a fetch request
@@ -22,8 +23,13 @@ function App() {
       <Header cart={cart} />
       <Routes>
         <Route path="/" element={<Home products={products} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product/:id" element={<ProductDetail products={products} cart={cart} setCart={setCart} />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetail products={products} cart={cart} setCart={setCart} />
+          }
+        />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
       </Routes>
     </>

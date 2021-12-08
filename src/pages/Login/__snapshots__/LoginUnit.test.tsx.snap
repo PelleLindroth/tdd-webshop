@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login unit tests renders Login component correctly 1`] = `
+<Fragment>
+  <h1>
+    LOGIN
+  </h1>
+  <form
+    name="login-form"
+  >
+    <label
+      htmlFor="email"
+    >
+      Email
+    </label>
+    <input
+      id="email"
+      name="email"
+      type="text"
+    />
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      id="password"
+      name="password"
+      type="text"
+    />
+    <button>
+      Login
+    </button>
+  </form>
+</Fragment>
+`;
