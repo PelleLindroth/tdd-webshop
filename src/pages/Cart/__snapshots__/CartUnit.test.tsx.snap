@@ -5,6 +5,12 @@ exports[`Cart shallow renders Cart component correctly 1`] = `
   <h1>
     Cart
   </h1>
-  <ul />
+  <h2>
+    Cart is empty. Buy something!
+  </h2>
+  <h2>
+    Grand total: SEK 
+    0
+  </h2>
 </Fragment>
 `;

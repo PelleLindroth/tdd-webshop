@@ -11,6 +11,7 @@ interface CartWithAmount extends IProduct {
 
 const Cart: React.FC<CartProps> = (props: CartProps) => {
   const { cart, setCart } = props
+  const [grandTotal, setGrandTotal] = useState(0)
 
   const [cartObject, setCartObject] = useState({})
 
@@ -26,10 +27,11 @@ const Cart: React.FC<CartProps> = (props: CartProps) => {
         return acc
       }, {})
     )
+    setGrandTotal(cart.reduce((acc: any, currItem) => acc + currItem.price, 0))
   }, [cart])
 
   const handleIncrement = (id: string) => {
-    const product = productsDb.find(item => item.id === id)
+    const product = productsDb.find((item) => item.id === id)
 
     if (product) {
       setCart([...cart, product])
@@ -37,30 +39,53 @@ const Cart: React.FC<CartProps> = (props: CartProps) => {
   }
 
   const handleDecrement = (id: string) => {
-    const cartItemIndex = cart.findIndex(item => item.id === id)
+    const cartItemIndex = cart.findIndex((item) => item.id === id)
     cart.splice(cartItemIndex, 1)
     setCart([...cart])
   }
 
+  const handleDelete = (id: string) => {
+    const updatedCart = cart.filter((item) => item.id !== id)
+    setCart([...updatedCart])
+  }
+
   const cartArr: CartWithAmount[] = Object.values(cartObject)
+
   return (
     <>
       <h1>Cart</h1>
-      <ul>
-        {cartArr.map(el => {
-          return (
-            <li key={el.id}>
-              <CartRow cartItem={el} />
-              <button data-testid={`increment-${el.name}`} onClick={() => handleIncrement(el.id)}>
-                +
-              </button>
-              <button data-testid={`decrement-${el.name}`} onClick={() => handleDecrement(el.id)}>
-                -
-              </button>
-            </li>
-          )
-        })}
-      </ul>
+      {cart.length > 0 ? (
+        <ul>
+          {cartArr.map((el) => {
+            return (
+              <li key={el.id}>
+                <CartRow cartItem={el} />
+                <button
+                  data-testid={`increment-${el.name}`}
+                  onClick={() => handleIncrement(el.id)}
+                >
+                  +
+                </button>
+                <button
+                  data-testid={`decrement-${el.name}`}
+                  onClick={() => handleDecrement(el.id)}
+                >
+                  -
+                </button>
+                <button
+                  data-testid={`delete-${el.name}`}
+                  onClick={() => handleDelete(el.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <h2>Cart is empty. Buy something!</h2>
+      )}
+      <h2>Grand total: SEK {grandTotal}</h2>
     </>
   )
 }
@@ -70,7 +95,7 @@ export default Cart
 const CartRow = (props: { cartItem: CartWithAmount }) => {
   const { cartItem } = props
   return (
-    <div>
+    <div data-testid={`${cartItem.name}-item`}>
       <h2>{cartItem.name}</h2>
       <p data-testid={`${cartItem.name}-amount`}>Amount: {cartItem.amount}</p>
       <p data-testid={`${cartItem.name}-price`}>SEK {cartItem.price}</p>
