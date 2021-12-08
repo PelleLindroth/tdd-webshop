@@ -23,13 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home products={products} />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/product/:id"
-          element={
-            <ProductDetail products={products} cart={cart} setCart={setCart} />
-          }
-        />
-        <Route path="/cart" element={<Cart cart={cart} />} />
+        <Route path="/product/:id" element={<ProductDetail products={products} cart={cart} setCart={setCart} />} />
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
       </Routes>
     </>
   )
