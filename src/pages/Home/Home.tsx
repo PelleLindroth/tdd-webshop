@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
-import { IProduct } from '../../mocks/products'
+import { getAllProducts, IProduct } from '../../mocks/products'
 import Card from '../../components/Card/Card'
 
-const Home = (props: { products: IProduct[] }) => {
-  const { products } = props
+// interface HomeProps {
+//   products: IProduct[]
+// }
+
+const Home = () => {
+  const products = getAllProducts()
   const [searchPhrase, setSearchPhrase] = useState('')
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
 
@@ -32,7 +36,6 @@ const Home = (props: { products: IProduct[] }) => {
           type="search"
         />
       </div>
-      {products.length === 0 && <h3>Something went wrong</h3>}
       {filteredProducts.length > 0 ? (
         <ul>
           {filteredProducts.map((product) => (

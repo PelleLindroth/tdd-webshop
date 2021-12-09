@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IProduct, productsDb } from '../../mocks/products'
+import { IProduct, getProductById } from '../../mocks/products'
 interface CartProps {
   cart: IProduct[]
   setCart: React.Dispatch<React.SetStateAction<IProduct[]>>
@@ -31,7 +31,7 @@ const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [cart])
 
   const handleIncrement = (id: string) => {
-    const product = productsDb.find((item) => item.id === id)
+    const product = getProductById(id)
     setCart([...cart, product!])
   }
 

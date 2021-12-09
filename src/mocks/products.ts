@@ -12,3 +12,13 @@ export const productsDb: IProduct[] = [
   { id: '5', name: 'laptop', price: 7800 },
   { id: '6', name: 'tv', price: 6920 },
 ]
+
+export const getAllProducts = (): IProduct[] => {
+  return productsDb
+}
+
+export const getProductById = (id: string): IProduct | undefined => {
+  const product = productsDb.find((item) => item.id === id)
+
+  return product
+}

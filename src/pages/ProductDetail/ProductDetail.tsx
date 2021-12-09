@@ -1,16 +1,17 @@
-import { IProduct } from '../../mocks/products'
+import { IProduct, getProductById } from '../../mocks/products'
 import { useParams } from 'react-router'
 
-const ProductDetail = (props: {
-  products: IProduct[]
+interface ProductDetailProps {
   cart: IProduct[]
   setCart: React.Dispatch<React.SetStateAction<IProduct[]>>
-}) => {
-  const { products, cart, setCart } = props
+}
+
+const ProductDetail = (props: ProductDetailProps) => {
+  const { cart, setCart } = props
 
   const { id } = useParams()
 
-  const product = products.find((prod) => prod.id === id)
+  const product = getProductById(id!)
 
   const handleAddToCart = () => {
     setCart([...cart, product!])
