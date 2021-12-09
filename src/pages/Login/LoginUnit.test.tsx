@@ -3,10 +3,15 @@ import { screen } from '@testing-library/react'
 import { renderWithRouter } from '../../testing-utils'
 import Login from './Login'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Login unit tests', () => {
   it('renders Login component correctly', () => {
-    const wrapper = shallow(<Login setUser={jest.fn()} />)
+    const wrapper = shallow(
+      <MemoryRouter>
+        <Login setUser={jest.fn()} />
+      </MemoryRouter>
+    )
 
     expect(wrapper).toMatchSnapshot()
   })
@@ -45,10 +50,65 @@ describe('Login unit tests', () => {
       password: 'bananpaj',
     })
   })
-})
+  it('shows error message when submitting wrong credentials', async () => {
+    renderWithRouter(<Login setUser={jest.fn()} />)
 
-// updates values in text inputs when typing
-// shows error message when submitting wrong credentials
-// shows error message if either email or password input fields is empty
-// renders my profile page correctly if user is logged in
-// redirects to login from my profile if user is not logged in
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
+    const passwordInput = screen.getByRole('textbox', { name: /password/i })
+    const loginButton = screen.getByRole('button', { name: /login/i })
+
+    userEvent.type(emailInput, 'pelle')
+    userEvent.type(passwordInput, 'bananpaj')
+    userEvent.click(loginButton)
+
+    const errorMessage = await screen.findByText('Email and password does not match our records')
+    expect(errorMessage).toBeInTheDocument()
+  })
+  it('calls setUser once when login button is clicked and credentials are correct', () => {
+    const setUserSpy = jest.fn()
+    renderWithRouter(<Login setUser={setUserSpy} />)
+
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
+    const passwordInput = screen.getByRole('textbox', { name: /password/i })
+    const loginButton = screen.getByRole('button', { name: /login/i })
+
+    userEvent.type(emailInput, 'pelle@yahoo.com')
+    userEvent.type(passwordInput, 'grillkorv')
+    userEvent.click(loginButton)
+
+    expect(setUserSpy).toHaveBeenCalledTimes(1)
+    expect(setUserSpy).toHaveBeenCalledWith({ email: 'pelle@yahoo.com', password: 'grillkorv' })
+  })
+  it('doesnt call setUser when login button is clicked but credentials are incorrect', () => {
+    const setUserSpy = jest.fn()
+    renderWithRouter(<Login setUser={setUserSpy} />)
+
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
+    const passwordInput = screen.getByRole('textbox', { name: /password/i })
+    const loginButton = screen.getByRole('button', { name: /login/i })
+
+    userEvent.type(emailInput, 'emma@yahoo.com')
+    userEvent.type(passwordInput, 'grillkorv')
+    userEvent.click(loginButton)
+
+    expect(setUserSpy).toHaveBeenCalledTimes(0)
+  })
+  it('disables login button by default', () => {
+    renderWithRouter(<Login setUser={jest.fn()} />)
+    const loginButton = screen.getByRole('button', { name: /login/i })
+    expect(loginButton).toBeDisabled()
+  })
+  it('enables login button by when both fields have input values', () => {
+    renderWithRouter(<Login setUser={jest.fn()} />)
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
+    const passwordInput = screen.getByRole('textbox', { name: /password/i })
+    const loginButton = screen.getByRole('button', { name: /login/i })
+
+    userEvent.type(emailInput, 'emma@yahoo.com')
+
+    expect(loginButton).toBeDisabled()
+    userEvent.type(passwordInput, 'grillkorv')
+
+    expect(loginButton).toBeEnabled()
+  })
+})

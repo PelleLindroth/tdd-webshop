@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import Cart from './pages/Cart/Cart'
+import Profile from './pages/Profile/Profile'
 import { productsDb, IProduct } from './mocks/products'
 import { IUser } from './mocks/users'
 
@@ -20,16 +21,13 @@ function App() {
 
   return (
     <>
-      <Header cart={cart} />
+      <Header cart={cart} user={user} />
       <Routes>
         <Route path="/" element={<Home products={products} />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route
-          path="/product/:id"
-          element={
-            <ProductDetail products={products} cart={cart} setCart={setCart} />
-          }
-        />
+
+        {user ? <Route path="/profile" element={<Profile />} /> : <Route path="/login" element={<Login setUser={setUser} />} />}
+
+        <Route path="/product/:id" element={<ProductDetail products={products} cart={cart} setCart={setCart} />} />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
       </Routes>
     </>

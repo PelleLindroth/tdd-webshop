@@ -17,3 +17,13 @@ export const usersDb: IUser[] = [
     password: 'paco',
   },
 ]
+
+
+export const validateUser = (email: string, password: string) => {
+  const user = usersDb.find(user => user.email === email)
+  if (user) {
+    return user.password === password ? user : null
+  } else {
+    return null
+  }
+} 
