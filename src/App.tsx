@@ -25,9 +25,21 @@ function App() {
       <Routes>
         <Route path="/" element={<Home products={products} />} />
 
-        {user ? <Route path="/profile" element={<Profile />} /> : <Route path="/login" element={<Login setUser={setUser} />} />}
+        {user ? (
+          <Route
+            path="/profile"
+            element={<Profile user={user} setUser={setUser} />}
+          />
+        ) : (
+          <Route path="/login" element={<Login setUser={setUser} />} />
+        )}
 
-        <Route path="/product/:id" element={<ProductDetail products={products} cart={cart} setCart={setCart} />} />
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetail products={products} cart={cart} setCart={setCart} />
+          }
+        />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
       </Routes>
     </>

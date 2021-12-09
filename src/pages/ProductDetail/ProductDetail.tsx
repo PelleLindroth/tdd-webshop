@@ -13,9 +13,7 @@ const ProductDetail = (props: {
   const product = products.find((prod) => prod.id === id)
 
   const handleAddToCart = () => {
-    if (product) {
-      setCart([...cart, product])
-    }
+    setCart([...cart, product!])
   }
 
   return (

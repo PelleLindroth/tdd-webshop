@@ -19,14 +19,12 @@ const Login = (props: LoginProps) => {
     e.preventDefault()
     setError(false)
 
-    if (email && password) {
-      const user = validateUser(email, password)
-      if (user) {
-        setUser(user)
-        navigate('/profile')
-      } else {
-        setError(true)
-      }
+    const user = validateUser(email, password)
+    if (user) {
+      setUser(user)
+      navigate('/profile')
+    } else {
+      setError(true)
     }
   }
 
@@ -35,20 +33,30 @@ const Login = (props: LoginProps) => {
       <h1>LOGIN</h1>
       <form name="login-form" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
-        <input name="email" id="email" type="text" value={email} onChange={e => setEmail(e.target.value)} />
+        <input
+          name="email"
+          id="email"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <label htmlFor="password">Password</label>
         <input
           name="password"
           id="password"
           type="text"
           value={password}
-          onChange={e => {
+          onChange={(e) => {
             setPassword(e.target.value)
           }}
         />
         <button disabled={!email.length || !password.length}>Login</button>
       </form>
-      {error && <p style={{ color: 'red' }}>Email and password does not match our records</p>}
+      {error && (
+        <p style={{ color: 'red' }}>
+          Email and password does not match our records
+        </p>
+      )}
     </>
   )
 }

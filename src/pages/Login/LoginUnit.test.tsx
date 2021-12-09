@@ -13,7 +13,7 @@ describe('Login unit tests', () => {
       </MemoryRouter>
     )
 
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find(Login)).toMatchSnapshot()
   })
   it('renders login form with text inputs for user email and password and a login button', () => {
     renderWithRouter(<Login setUser={jest.fn()} />)
@@ -61,7 +61,9 @@ describe('Login unit tests', () => {
     userEvent.type(passwordInput, 'bananpaj')
     userEvent.click(loginButton)
 
-    const errorMessage = await screen.findByText('Email and password does not match our records')
+    const errorMessage = await screen.findByText(
+      'Email and password does not match our records'
+    )
     expect(errorMessage).toBeInTheDocument()
   })
   it('calls setUser once when login button is clicked and credentials are correct', () => {
@@ -77,7 +79,10 @@ describe('Login unit tests', () => {
     userEvent.click(loginButton)
 
     expect(setUserSpy).toHaveBeenCalledTimes(1)
-    expect(setUserSpy).toHaveBeenCalledWith({ email: 'pelle@yahoo.com', password: 'grillkorv' })
+    expect(setUserSpy).toHaveBeenCalledWith({
+      email: 'pelle@yahoo.com',
+      password: 'grillkorv',
+    })
   })
   it('doesnt call setUser when login button is clicked but credentials are incorrect', () => {
     const setUserSpy = jest.fn()

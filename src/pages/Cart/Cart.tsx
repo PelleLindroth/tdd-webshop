@@ -32,10 +32,7 @@ const Cart: React.FC<CartProps> = (props: CartProps) => {
 
   const handleIncrement = (id: string) => {
     const product = productsDb.find((item) => item.id === id)
-
-    if (product) {
-      setCart([...cart, product])
-    }
+    setCart([...cart, product!])
   }
 
   const handleDecrement = (id: string) => {

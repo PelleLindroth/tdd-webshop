@@ -5,6 +5,9 @@
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.tsx"
     ]
   },
   "dependencies": {
@@ -28,6 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:full": "react-scripts test --verbose --coverage watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

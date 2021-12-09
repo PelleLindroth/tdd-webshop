@@ -1,41 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login unit tests renders Login component correctly 1`] = `
-<Router
-  location={
-    Object {
-      "hash": "",
-      "key": "hvfop9q0",
-      "pathname": "/",
-      "search": "",
-      "state": null,
-    }
-  }
-  navigationType="POP"
-  navigator={
-    Object {
-      "action": "POP",
-      "back": [Function],
-      "block": [Function],
-      "createHref": [Function],
-      "forward": [Function],
-      "go": [Function],
-      "index": 0,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "hvfop9q0",
-        "pathname": "/",
-        "search": "",
-        "state": null,
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
->
-  <Login
-    setUser={[MockFunction]}
-  />
-</Router>
+<Login
+  setUser={[MockFunction]}
+/>
 `;

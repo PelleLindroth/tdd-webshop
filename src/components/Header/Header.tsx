@@ -20,9 +20,15 @@ const Header = (props: HeaderProps) => {
         <Link data-testid="home" to="/">
           Home
         </Link>
-        <Link data-testid="login" to="/login">
-          Login
-        </Link>
+        {!user ? (
+          <Link data-testid="login" to="/login">
+            Login
+          </Link>
+        ) : (
+          <Link data-testid="profile" to="/profile">
+            My profile
+          </Link>
+        )}
         <Link data-testid="cart" to="/cart">
           My Cart
         </Link>
